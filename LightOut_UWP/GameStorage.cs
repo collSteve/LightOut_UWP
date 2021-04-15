@@ -22,4 +22,9 @@ namespace LightOut_UWP
     };
 
     }
+
+    public class NavigationInfo
+    {
+        public int GameID { get; set; }
+    }
 }

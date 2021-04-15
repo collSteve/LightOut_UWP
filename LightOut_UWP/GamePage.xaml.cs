@@ -50,13 +50,16 @@ namespace LightOut_UWP
         {
             base.OnNavigatedTo(e);
 
-            game = GameStorage.Games[2];
+            var parameter = (NavigationInfo)e.Parameter;
+
+            game = GameStorage.Games[parameter.GameID];
 
             SetUpGame();
+        }
 
-            // parameters.Name
-            // parameters.Text
-            // ...
+        void OnMenuClick(Object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainMenuPage));
         }
 
 

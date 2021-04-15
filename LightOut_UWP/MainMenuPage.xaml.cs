@@ -26,5 +26,16 @@ namespace LightOut_UWP
         {
             this.InitializeComponent();
         }
+
+        void OnGo(Object sender, RoutedEventArgs e)
+        {
+            int id;
+            if (int.TryParse(IDText.Text, out id))
+            {
+                NavigationInfo parameter = new NavigationInfo();
+                parameter.GameID = id;
+                Frame.Navigate(typeof(GamePage), parameter);
+            }
+        }
     }
 }
