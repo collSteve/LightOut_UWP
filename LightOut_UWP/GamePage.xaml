@@ -32,7 +32,7 @@
             <Button x:Name="RestartButton" HorizontalAlignment="Center" Grid.Row="1"
                     VerticalAlignment="Top">Restart</Button>
         </Grid>
-        <Button x:Name="button" Content="Menu" Margin="1363,264,0,0" Grid.Row="1" 
+        <Button x:Name="button" Content="Menu" 
                 VerticalAlignment="Top" Click="OnMenuClick"/>
 
     </Grid>

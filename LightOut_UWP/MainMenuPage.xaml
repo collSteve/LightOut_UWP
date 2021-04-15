@@ -9,7 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox x:Name="IDText" Text="dddddd"></TextBox>
-        <Button x:Name="Go" Click="OnGo">Go</Button>
+        <TextBox x:Name="IDText" Text="" Width="100" Height="50"></TextBox>
+        <Button x:Name="Go" Click="OnGo" Margin="41,344,0,0" 
+                VerticalAlignment="Top">Go</Button>
     </Grid>
 </Page>

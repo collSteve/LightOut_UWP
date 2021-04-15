@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -50,11 +51,21 @@ namespace LightOut_UWP
         {
             base.OnNavigatedTo(e);
 
-            var parameter = (NavigationInfo)e.Parameter;
+            Debug.WriteLine(e.Parameter);
+            try
+            {
+                var parameter = (NavigationInfo)e.Parameter;
+                game = GameStorage.Games[parameter.GameID];
+                SetUpGame();
+            }
+            catch(Exception error)
+            {
+                Debug.WriteLine($"Error when navigating to GamePage: {error}");
+                Frame.Navigate(typeof(MainMenuPage));
+            }
+            
 
-            game = GameStorage.Games[parameter.GameID];
-
-            SetUpGame();
+            
         }
 
         void OnMenuClick(Object sender, RoutedEventArgs e)
