@@ -22,20 +22,47 @@ namespace LightOut_UWP
     /// </summary>
     public sealed partial class MainMenuPage : Page
     {
+        List<GameSlectingItem> GameSelectingItems;
         public MainMenuPage()
         {
             this.InitializeComponent();
+            InitializeGameSelectingItems();
+
+            GameSelectingFlipView.ItemsSource = GameSelectingItems;
+        }
+
+        void InitializeGameSelectingItems()
+        {
+            GameSelectingItems = new List<GameSlectingItem>();
+            for (int i=0; i< GameStorage.Games.Length; i++)
+            {
+                GameSlectingItem item = new GameSlectingItem();
+                item.GameID = i;
+
+                GameSelectingItems.Add(item);
+            }
         }
 
         void OnGo(Object sender, RoutedEventArgs e)
         {
-            int id;
-            if (int.TryParse(IDText.Text, out id))
+            //int id;
+            GameSlectingItem item = (GameSlectingItem)GameSelectingFlipView.SelectedItem;
+            /*if (int.TryParse(item.Text, out id) && 0<=id && id <=GameStorage.Games.Length)
             {
                 NavigationInfo parameter = new NavigationInfo();
                 parameter.GameID = id;
                 Frame.Navigate(typeof(GamePage), parameter);
-            }
+            }*/
+            NavigationInfo parameter = new NavigationInfo();
+            parameter.GameID = item.GameID;
+            Frame.Navigate(typeof(GamePage), parameter);
         }
     }
+
+    class GameSlectingItem
+    {
+        public string Name { set; get; }
+        public int GameID { set; get; }
+    }
+
 }

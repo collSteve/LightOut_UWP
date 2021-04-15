@@ -45,6 +45,11 @@ namespace LightOut_UWP
             InitializeGame(GameBoard, GameStatueText, RestartButton);
         }
 
+        public void Restart()
+        {
+            InitializeGame(GameBoard, GameStatueText, RestartButton);
+        }
+
         protected virtual void InitializeGameBoard(Grid board)
         {
             // empty game board

@@ -8,9 +8,60 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBox x:Name="IDText" Text="" Width="100" Height="50"></TextBox>
-        <Button x:Name="Go" Click="OnGo" Margin="41,344,0,0" 
-                VerticalAlignment="Top">Go</Button>
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Menu" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="My Puzzles" Grid.Row="0"
+                       TextAlignment="Center" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" FontSize="50" FontWeight="Bold"></TextBlock>
+            <TextBlock Text="Level" Grid.Row="1"
+                       TextAlignment="Center" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" FontSize="40"></TextBlock>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <FlipView x:Name="GameSelectingFlipView"
+                       HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch" Grid.Column="1" Background="Transparent">
+                    <FlipView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+
+                                <TextBlock Text="{Binding GameID}" FontSize="28" Padding="15,20"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                            </Grid>
+                        </DataTemplate>
+                    </FlipView.ItemTemplate>
+
+                </FlipView>
+            </Grid>
+
+            <Button x:Name="Go" Click="OnGo" HorizontalAlignment="Center"
+                VerticalAlignment="Center" Grid.Row="3" Width="100" Height="50">
+                <StackPanel Padding="10">
+                    <SymbolIcon Symbol="Play"/>
+                </StackPanel>
+                
+
+            </Button>
+        </Grid>
+
     </Grid>
 </Page>

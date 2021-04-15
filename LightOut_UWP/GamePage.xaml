@@ -8,6 +8,26 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <Storyboard x:Name="NextLevelButtonFlash" >
+            <DoubleAnimation Storyboard.TargetName="NextLevelButton"
+                                Storyboard.TargetProperty="Opacity" 
+                             From="1" 
+                             To="0.2" 
+                             AutoReverse="True" 
+                             Duration="0:0:0.8" RepeatBehavior="Forever" />
+        </Storyboard>
+
+        <Storyboard x:Name="RestartButtonFlash" >
+            <DoubleAnimation Storyboard.TargetName="RestartButton"
+                                Storyboard.TargetProperty="Opacity" 
+                             From="1" 
+                             To="0.2" 
+                             AutoReverse="True" 
+                             Duration="0:0:0.8" RepeatBehavior="Forever" />
+        </Storyboard>
+    </Page.Resources>
+
     <Grid RowSpacing="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.8*"></RowDefinition>
@@ -30,10 +50,23 @@
                    FontSize="35"
                        Grid.Row="0"></TextBlock>
             <Button x:Name="RestartButton" HorizontalAlignment="Center" Grid.Row="1"
-                    VerticalAlignment="Top">Restart</Button>
+                    VerticalAlignment="Top">
+                <SymbolIcon>RePeatAll</SymbolIcon>
+            </Button>
         </Grid>
-        <Button x:Name="button" Content="Menu" 
-                VerticalAlignment="Top" Click="OnMenuClick"/>
+        <Button x:Name="MenuButton" Content="Menu" 
+                VerticalAlignment="Top"/>
+        <Button x:Name="NextLevelButton" 
+                VerticalAlignment="Center">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Next Level"></TextBlock>
+                    <SymbolIcon>Play</SymbolIcon>
+                </StackPanel>
+            </Button.Content>
+
+            
+        </Button>
 
     </Grid>
 </Page>

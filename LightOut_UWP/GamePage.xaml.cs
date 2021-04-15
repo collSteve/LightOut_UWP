@@ -23,27 +23,29 @@ namespace LightOut_UWP
     /// </summary>
     public sealed partial class GamePage : Page
     {
-        int[,] lightMatrix = new int[,] {
-            { 1, 0, 1, 1, 1 },
-            { 0, 0, 0, 1, 1 },
-            { 1, 0, 1, 1, 1 } };
-        Game game;
+        int GameID;
+        Game _game;
 
         public GamePage()
         {
             this.InitializeComponent();
-            //LightGame game = new LightGame(lightMatrix);
 
-            
+            // hook up events
+            RestartButton.Click += OnRestart;
+            NextLevelButton.Click += OnNextLevelClick;
+            MenuButton.Click += OnMenuClick;
+
+            RestartButtonFlash.Begin();
         }
 
-        private void SetUpGame()
+        private void SetUpGame(Game game)
         {
             // initialize game
             game.InitializeGame(GameBoard, GameStatueText, RestartButton);
             // hooking up game events
             Window.Current.SizeChanged += game.OnWindowSizeChanged;
-            RestartButton.Click += game.OnRestart;
+            //RestartButton.Click += game.OnRestart;
+            
         }
 
         // Receive data on navigation
@@ -55,22 +57,43 @@ namespace LightOut_UWP
             try
             {
                 var parameter = (NavigationInfo)e.Parameter;
-                game = GameStorage.Games[parameter.GameID];
-                SetUpGame();
+
+                LoadGame(parameter.GameID);
             }
             catch(Exception error)
             {
                 Debug.WriteLine($"Error when navigating to GamePage: {error}");
                 Frame.Navigate(typeof(MainMenuPage));
             }
-            
-
-            
         }
 
         void OnMenuClick(Object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(MainMenuPage));
+        }
+
+        void OnNextLevelClick(Object sender, RoutedEventArgs e)
+        {
+            if (GameID < GameStorage.Games.Length - 1) // check if there is next level
+            {
+                // load next game
+                LoadGame(GameID + 1);
+            }
+        }
+
+        void OnRestart(Object sender, RoutedEventArgs e)
+        {
+            _game.Restart();
+        }
+
+        void LoadGame(int gameID)
+        {
+            _game = GameStorage.Games[gameID]; // store the game
+            GameID = gameID; // store Game ID
+            SetUpGame(_game);
+
+            RestartButtonFlash.Stop();
+            NextLevelButtonFlash.Stop();
         }
 
 
