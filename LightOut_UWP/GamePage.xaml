@@ -1,0 +1,37 @@
+﻿<Page
+    x:Class="LightOut_UWP.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LightOut_UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="GameBoard"
+              Background="Black" VerticalAlignment="Center"
+              Grid.Row="1">
+        </Grid>
+        <Grid RowSpacing="10" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="GameStatueText" Text="Turn off the Lights" 
+                   HorizontalTextAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="35"
+                       Grid.Row="0"></TextBlock>
+            <Button x:Name="RestartButton" HorizontalAlignment="Center" Grid.Row="1"
+                    VerticalAlignment="Top">Restart</Button>
+        </Grid>
+
+    </Grid>
+</Page>
