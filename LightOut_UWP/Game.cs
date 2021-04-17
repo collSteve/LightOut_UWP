@@ -9,11 +9,24 @@ using Windows.UI.Xaml.Controls;
 
 namespace LightOut_UWP
 {
+    public enum GameResult
+    {
+        Failed,
+        Succeeded,
+        Other
+    }
+
+    public class GameEndEventArgs : EventArgs
+    {
+        public GameResult gameResult { get; set; }
+    }
+
     public abstract class Game
     {
         public Grid GameBoard;
         public TextBlock GameStatueText;
         public Button RestartButton;
+        public string GameDescription;
 
         protected float gameBoardRowSpacing = 5f;
         protected float gameBoardColumnSpacing = 5f;
@@ -21,10 +34,8 @@ namespace LightOut_UWP
         protected float gameBoardWindowHeightRatio = 1 / 2f;
         protected float gameBoardWindowWidthRatio = 1f;
 
-        public Game()
-        {
-            
-        }
+        // Game end event
+        public event EventHandler<GameEndEventArgs> GameEnded;
 
         public virtual void InitializeGame(Grid gameBoard, TextBlock gameStatueText, Button restartButton)
         {
@@ -76,6 +87,12 @@ namespace LightOut_UWP
 
             GameBoard.Width = smallerDimension;
             GameBoard.Height = smallerDimension;
+        }
+
+        protected virtual void OnGameEnded(GameEndEventArgs e)
+        {
+            // fire event
+            GameEnded?.Invoke(this, e);
         }
 
 

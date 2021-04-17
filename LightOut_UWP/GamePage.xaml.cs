@@ -26,6 +26,9 @@ namespace LightOut_UWP
         int GameID;
         Game _game;
 
+        string successText = "WooHoo! You Won!";
+        string failText = "Oops, please try again...";
+
         public GamePage()
         {
             this.InitializeComponent();
@@ -35,7 +38,7 @@ namespace LightOut_UWP
             NextLevelButton.Click += OnNextLevelClick;
             MenuButton.Click += OnMenuClick;
 
-            RestartButtonFlash.Begin();
+            NextLevelButton.Visibility = Visibility.Collapsed;
         }
 
         private void SetUpGame(Game game)
@@ -84,6 +87,9 @@ namespace LightOut_UWP
         void OnRestart(Object sender, RoutedEventArgs e)
         {
             _game.Restart();
+            GameStatueText.Text = _game.GameDescription;
+
+            NextLevelButtonFlash.Stop();
         }
 
         void LoadGame(int gameID)
@@ -92,8 +98,33 @@ namespace LightOut_UWP
             GameID = gameID; // store Game ID
             SetUpGame(_game);
 
+            // subscribe to game's game end event
+            _game.GameEnded += OnGameEnded;
+
             RestartButtonFlash.Stop();
             NextLevelButtonFlash.Stop();
+
+            GameStatueText.Text = _game.GameDescription;
+
+            // hide next level button
+            NextLevelButton.Visibility = Visibility.Collapsed;
+        }
+
+        void OnGameEnded(object sender, GameEndEventArgs e)
+        {
+            if (e.gameResult == GameResult.Succeeded)
+            {
+                NextLevelButton.Visibility = Visibility.Visible;
+                NextLevelButtonFlash.Begin();
+
+                GameStatueText.Text = successText;
+            }
+            else if (e.gameResult == GameResult.Failed)
+            {
+                RestartButtonFlash.Begin();
+
+                GameStatueText.Text = failText;
+            }
         }
 
 

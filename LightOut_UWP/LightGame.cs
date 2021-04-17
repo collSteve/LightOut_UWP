@@ -13,12 +13,15 @@ namespace LightOut_UWP
         private int[,] lightMatrix;
         private Light[,] lights;
 
+        
+
         public LightGame(int[,] lightMatrix)
         {
             this.lightMatrix = lightMatrix;
             // set default row apcing and column spacing for light game
             gameBoardRowSpacing = 5f;
             gameBoardColumnSpacing = 5f;
+            GameDescription = "Turn off the Lights";
         }
 
         public override void InitializeGame(Grid gameBoard, TextBlock gameStatueText, Button restartButton)
@@ -28,8 +31,6 @@ namespace LightOut_UWP
 
             InitializeGameBoard(lightMatrix, GameBoard);
             lights = InitializeLights(lightMatrix, lights, GameBoard);
-            GameStatueText.Text = "Turn off the Lights";
-            RestartButton.Visibility = Visibility.Collapsed;
         }
 
         void InitializeGameBoard(int[,] matrix, Grid board)
@@ -128,8 +129,13 @@ namespace LightOut_UWP
             // wining evaluation 
             if (GameWon(lights))
             {
-                GameStatueText.Text = "WooHoo! You Won!";
-                RestartButton.Visibility = Visibility.Visible;
+                // create event args
+                GameEndEventArgs data = new GameEndEventArgs();
+                data.gameResult = GameResult.Succeeded;
+
+                // fire game ended event
+                OnGameEnded(data);
+
                 DisableLightClick(lights);
             }
         }
