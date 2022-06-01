@@ -17,7 +17,13 @@ namespace LightOut_UWP
                                       { 1, 0, 1 } }),
             new LightGame(new int[,] {{ 1, 0 },
                                       { 0, 0 },
-                                      { 1, 0 } })
+                                      { 1, 0 } }),
+            new LightGame(new int[,] {{ 1, 0 },
+                                      { 0, 0 },
+                                      { 0, 1 } }),
+            new LightGame(new int[,] {{ 1, 0, 1 },
+                                      { 0, 0, 1 },
+                                      { 1, 0, 0 } })
 
     };
 

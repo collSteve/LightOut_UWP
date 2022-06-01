@@ -15,7 +15,7 @@
                              From="1" 
                              To="0.2" 
                              AutoReverse="True" 
-                             Duration="0:0:0.8" RepeatBehavior="Forever" />
+                             Duration="0:0:0.8" RepeatBehavior="5x" />
         </Storyboard>
 
         <Storyboard x:Name="RestartButtonFlash" >
@@ -24,7 +24,7 @@
                              From="1" 
                              To="0.2" 
                              AutoReverse="True" 
-                             Duration="0:0:0.8" RepeatBehavior="Forever" />
+                             Duration="0:0:0.8" RepeatBehavior="5x" />
         </Storyboard>
     </Page.Resources>
 
